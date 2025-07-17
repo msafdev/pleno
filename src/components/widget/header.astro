@@ -1,0 +1,18 @@
+---
+import { Button } from '@/components/ui/button'
+
+import { ToggleTheme } from '@/components/shared/react/toggle-theme'
+
+import { Book } from 'lucide-react'
+---
+
+<header class="flex items-center justify-between">
+  <h1 class="font-display font-black text-foreground text-xl">Pleno</h1>
+
+  <div class="flex items-center gap-1">
+    <Button size="icon" variant="ghost" className="cursor-pointer">
+      <Book />
+    </Button>
+    <ToggleTheme client:only="react" />
+  </div>
+</header>

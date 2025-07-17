@@ -1,0 +1,78 @@
+---
+import { themeConfig } from '@/config'
+import type { PostLayoutProps } from '@/types/component.type'
+
+import RootLayout from '@/layouts/root-layout.astro'
+
+import Date from '@/components/shared/date.astro'
+import Back from '@/components/shared/back.astro'
+import Copy from '@/components/shared/copy.astro'
+
+import ContribCard from '@/components/widget/github-card.astro'
+import ImageViewer from '@/components/widget/image-viewer.astro'
+import Toc from '@/components/widget/toc.astro'
+
+import ImageOptimizer from '@/functions/image-optimizer.astro'
+
+import Footer from '@/components/widget/footer.astro'
+import Meta from '@/components/widget/meta.astro'
+import Header from '@/components/widget/header.astro'
+
+const { title, pubDate, readingTime, toc } = Astro.props as PostLayoutProps
+
+const postSlug = Astro.url.pathname.split('/').filter(Boolean).pop() || ''
+const ogImage = `/open-graph/${postSlug}.png`
+---
+
+<RootLayout
+  title={`${title} · ${themeConfig.site.title}`}
+  description={themeConfig.site.description}
+  type="post"
+>
+  <Meta
+    title={`${title} · ${themeConfig.site.title}`}
+    description={themeConfig.site.description}
+    ogImage={ogImage}
+    slot="head"
+  />
+  <div class="space-y-8 w-full max-w-lg">
+    <div>
+      <Header />
+    </div>
+
+    <main>
+      <div class="prose">
+        {
+          themeConfig.post.toc && (
+            <Toc toc={toc}>
+              <Back slot="button" />
+            </Toc>
+          )
+        }
+
+        <div class="title">
+          <h1 transition:name="post_title">{title}</h1>
+          <div class="text-sm opacity-60">
+            <Date date={pubDate} context="post" />
+            {
+              readingTime && (
+                <span class="text-foreground">
+                  <span class="text-muted-foreground">·</span>
+                  {readingTime.text}
+                </span>
+              )
+            }
+          </div>
+        </div>
+
+        <slot />
+      </div>
+    </main>
+
+    <Copy />
+    <ImageOptimizer />
+    <ContribCard />
+    {themeConfig.post.imageViewer && <ImageViewer />}
+    {themeConfig.general.footer && <Footer />}
+  </div>
+</RootLayout>

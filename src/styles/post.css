@@ -1,0 +1,284 @@
+@import 'tailwindcss';
+
+@layer components {
+  pre {
+    @apply relative;
+  }
+
+  .copy-button, .copy-button svg{
+    @apply size-8 absolute top-2 right-2 cursor-pointer;
+  }
+
+  .prose .title {
+    @apply mb-8;
+  }
+
+  .prose .title h1 {
+    @apply mb-2;
+  }
+
+  .prose h1 {
+    @apply text-xl font-semibold;
+  }
+
+  .prose h2,
+  .prose h3 {
+    @apply text-lg font-semibold mt-8 mb-4;
+  }
+
+  .prose h4,
+  .prose h5 {
+    @apply text-lg font-medium mt-6 mb-4;
+  }
+
+  .prose strong,
+  .prose b {
+    @apply font-bold;
+  }
+
+  .prose em {
+    @apply italic tracking-tight;
+  }
+
+  .prose a {
+    @apply text-primary transition-colors duration-200 ease-out hover:underline hover:text-foreground;
+  }
+
+  .prose p {
+    @apply leading-normal mb-4 text-foreground/80;
+  }
+
+  .prose table {
+    @apply w-full border border-border rounded-lg text-sm my-4 overflow-hidden;
+    table-layout: fixed;
+    border-collapse: separate;
+    border-spacing: 0;
+  }
+
+  .prose th,
+  .prose td {
+    @apply border-b border-r border-border px-4 py-2 text-left;
+  }
+  .prose th:last-child,
+  .prose td:last-child {
+    @apply border-r-0;
+  }
+  .prose tr:last-child td {
+    @apply border-b-0;
+  }
+  .prose th {
+    @apply bg-muted font-bold;
+  }
+
+  .prose img {
+    @apply block my-4 w-full h-auto;
+  }
+
+  .img-placeholder {
+    @apply bg-muted block;
+  }
+
+  .prose img[loading='lazy'] {
+    @apply opacity-0;
+    animation: fadeIn 0.3s ease-out forwards;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  .prose figure {
+    @apply mb-4 text-center;
+  }
+
+  .prose figure img {
+    @apply mb-2;
+  }
+
+  .prose figure figcaption,
+  .prose .img-caption,
+  .prose p > img::after {
+    @apply text-muted text-sm text-center block mt-2;
+  }
+
+  .prose code {
+    @apply px-1.5 py-0.5 rounded-md border border-border bg-muted font-mono text-sm;
+  }
+
+  .prose pre {
+    @apply bg-muted rounded-lg px-6 py-5 my-4 overflow-x-auto;
+  }
+  @media (max-width: 768px) {
+    .prose pre {
+      @apply px-5 py-4;
+    }
+  }
+  .prose pre > code {
+    @apply font-mono block whitespace-pre-wrap break-words p-0 m-0 bg-transparent border-0 leading-6 rounded-none;
+  }
+  .prose pre > code * {
+    @apply text-sm;
+  }
+
+  .prose blockquote {
+    @apply border-l-2 pl-6 my-4 text-left border-border;
+  }
+  .prose blockquote p {
+    @apply m-0;
+  }
+  .prose blockquote cite {
+    @apply inline-block mt-2;
+  }
+
+  .prose ul {
+    @apply list-none ml-4 mb-4 leading-7;
+  }
+  .prose ul ul {
+    @apply ml-2 my-2;
+  }
+  .prose ul li {
+    @apply relative pl-2 mb-2;
+  }
+  .prose ul li:last-child {
+    @apply mb-0;
+  }
+  .prose ul li::before {
+    content: '•';
+    @apply absolute -left-4 text-muted;
+  }
+
+  .prose ol {
+    @apply list-decimal ml-4 mb-4;
+  }
+  .prose ol li {
+    @apply relative pl-1 mb-2;
+  }
+  .prose ol li:last-child {
+    @apply mb-0;
+  }
+
+  .prose ul.contains-task-list {
+    @apply list-none ml-0 whitespace-nowrap;
+  }
+  .prose ul.contains-task-list li::before {
+    content: none;
+  }
+  .prose ul.contains-task-list li.task-list-item {
+    @apply pl-0.5 mb-2;
+  }
+  .prose ul.contains-task-list input[type='checkbox'] {
+    @apply mr-2 w-4 h-4 border border-muted rounded bg-transparent appearance-none;
+  }
+  .prose ul.contains-task-list input[type='checkbox']:checked {
+    @apply bg-muted border-muted opacity-50 relative;
+  }
+  .prose ul.contains-task-list input[type='checkbox']:checked::before {
+    content: '✓';
+    @apply absolute left-0.5 top-0 text-muted font-bold text-xs;
+  }
+  .prose ul.contains-task-list input[type='checkbox'] + * {
+    @apply inline ml-0 leading-7 whitespace-nowrap;
+  }
+
+  .prose sup,
+  .prose sub,
+  .prose sup a {
+    @apply mx-0.5 text-sm leading-none;
+  }
+
+  .prose hr {
+    @apply my-10 h-4 text-center relative border-none bg-none;
+  }
+  .prose hr::after {
+    content: '***';
+    @apply font-mono h-4 text-muted-foreground !text-sm tracking-widest;
+  }
+
+  .prose kbd {
+    @apply font-mono text-sm border border-muted px-1 rounded min-w-[1.75em] inline-block text-center;
+  }
+
+  .prose mark {
+    @apply bg-[#D567E6] dark:bg-[#E4DE7DFA] text-background px-1;
+  }
+
+  .prose .footnotes {
+    @apply mt-16 pt-7 relative;
+  }
+  .prose .footnotes::before {
+    @apply absolute top-0 left-0 w-16 h-px bg-border;
+    content: '';
+  }
+  .prose cite {
+    @apply not-italic;
+  }
+
+  .prose [data-footnote-ref],
+  .prose [data-footnote-backref] {
+    @apply text-muted/90 no-underline transition-colors pr-2;
+  }
+  .prose [data-footnote-backref] {
+    @apply relative font-mono text-base -top-[0.05em];
+  }
+  .prose [data-footnote-ref] {
+    @apply text-[1em];
+  }
+  .prose [data-footnote-ref]:hover,
+  .prose [data-footnote-backref]:hover {
+    @apply text-foreground;
+  }
+
+  .prose iframe {
+    @apply w-full aspect-video rounded-md my-1 border-0;
+  }
+  .prose iframe[src*='spotify.com'] {
+    @apply aspect-auto;
+  }
+
+  .reading-time {
+    @apply text-muted tracking-tight;
+  }
+  .reading-time .separator {
+    @apply mx-1;
+  }
+
+  .katex-mathml {
+    display: none !important;
+  }
+
+  .katex-display {
+    @apply text-center my-6;
+  }
+
+  .katex * {
+    box-sizing: content-box;
+  }
+
+  .katex,
+  .katex * {
+    @apply text-inherit;
+  }
+
+  .katex .base,
+  .katex .strut,
+  .katex .mathit,
+  .katex .mathrm,
+  .katex .mathbf,
+  .katex .mathsf,
+  .katex .mathtt {
+    line-height: initial;
+    vertical-align: baseline;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .katex,
+    .katex * {
+      color: inherit;
+    }
+  }
+}

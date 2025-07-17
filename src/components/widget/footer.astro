@@ -1,0 +1,22 @@
+---
+import { themeConfig } from '@/config'
+
+const today = new Date()
+---
+
+<footer>
+  <div class="flex items-center justify-between">
+    <div class="text-sm text-foreground">
+      <span class="text-muted-foreground">
+        &copy;
+        {today.getFullYear()}
+      </span>
+      {themeConfig.site.author}
+    </div>
+    <div class="text-muted-foreground text-sm text-right">
+      Powered by{' '}
+      <a href="https://astro.build" class="text-foreground">Astro</a> &{' '}
+      <a href="https://github.com/the3ash/astro-chiri" class="text-foreground">Chiri</a>
+    </div>
+  </div>
+</footer>

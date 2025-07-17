@@ -1,0 +1,186 @@
+<script>
+  import type {
+    GitHubContribData,
+    CachedContribData,
+    ContribCardElements
+  } from '@/types/index.type'
+
+  let contribObserver: IntersectionObserver | null = null
+
+  const GITHUB_GQL_ENDPOINT = 'https://api.github.com/graphql'
+  const GITHUB_TOKEN = import.meta.env.PUBLIC_GITHUB_TOKEN
+
+  function getCachedData(user: string): GitHubContribData | null {
+    try {
+      const cacheKey = `github-contrib-${user}`
+      const cached = localStorage.getItem(cacheKey)
+
+      if (!cached) return null
+
+      const parsed: CachedContribData = JSON.parse(cached)
+      const now = Date.now()
+      const oneHour = 60 * 60 * 1000
+
+      if (now - parsed.timestamp > oneHour) {
+        localStorage.removeItem(cacheKey)
+        return null
+      }
+
+      return parsed.data
+    } catch (error) {
+      console.warn('Failed to read contrib cache:', error)
+      return null
+    }
+  }
+
+  function setCachedData(user: string, data: GitHubContribData): void {
+    try {
+      const cacheKey = `github-contrib-${user}`
+      const payload: CachedContribData = {
+        data,
+        timestamp: Date.now()
+      }
+      localStorage.setItem(cacheKey, JSON.stringify(payload))
+    } catch (error) {
+      console.warn('Failed to save contrib cache:', error)
+    }
+  }
+
+  function renderContributionGrid(container: HTMLElement, data: GitHubContribData) {
+    const calendar = data.user.contributionsCollection.contributionCalendar
+    const weeks = calendar.weeks
+
+    const grid = document.createElement('div')
+    grid.className = 'grid grid-cols-[repeat(53,_minmax(8px,_1fr))] gap-[2px]'
+
+    // Flatten last ~13 weeks (≈ 3 months)
+    const last13Weeks = weeks.slice(-53)
+
+    last13Weeks.forEach((week) => {
+      week.contributionDays.forEach((day) => {
+        const box = document.createElement('div')
+        const count = day.contributionCount
+        const color =
+          count === 0
+            ? 'bg-primary/40'
+            : count < 5
+              ? 'bg-primary/50'
+              : count < 10
+                ? 'bg-primary/60'
+                : count < 20
+                  ? 'bg-primary/70'
+                  : 'bg-primary/80'
+
+        box.className = `size-[8px] shrink-0 aspect-square ${color} rounded-[1px]`
+        box.title = `${count} contributions on ${day.date}`
+
+        grid.appendChild(box)
+      })
+    })
+
+    const gridWrapper = container.querySelector('.gc-contrib-grid')
+    if (gridWrapper) {
+      gridWrapper.innerHTML = ''
+      gridWrapper.appendChild(grid)
+    }
+  }
+
+  function updateCardUI(el: ContribCardElements, data: GitHubContribData) {
+    const total = data.user.contributionsCollection.contributionCalendar.totalContributions
+
+    if (el.count) {
+      el.count.textContent = `${total.toLocaleString()} contributions`
+    }
+
+    const card = el.count?.closest('.gc-contrib-card') as HTMLElement
+    if (card) {
+      renderContributionGrid(card, data)
+    }
+  }
+
+  async function loadCardData(card: HTMLElement) {
+    const user = card.dataset.user
+    if (!user) return
+
+    const el = {
+      count: card.querySelector('.gc-contrib-count') as HTMLElement
+    }
+
+    const cached = getCachedData(user)
+    if (cached) {
+      updateCardUI(el, cached)
+      return
+    }
+
+    try {
+      const res = await fetch(GITHUB_GQL_ENDPOINT, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${GITHUB_TOKEN}`
+        },
+        body: JSON.stringify({
+          query: `
+            query($userName: String!) {
+              user(login: $userName) {
+                contributionsCollection {
+                  contributionCalendar {
+                    totalContributions
+                    weeks {
+                      contributionDays {
+                        contributionCount
+                        date
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          `,
+          variables: { userName: user }
+        })
+      })
+
+      if (!res.ok) {
+        if (el.count) el.count.textContent = '⚠ Loading failed'
+        return
+      }
+
+      const { data } = await res.json()
+      setCachedData(user, data)
+      updateCardUI(el, data)
+    } catch (error) {
+      console.error(`Failed to fetch contributions for ${user}:`, error)
+      if (el.count) el.count.textContent = '⚠ Loading failed'
+    }
+  }
+
+  function lazySetupContribCards() {
+    contribObserver?.disconnect()
+
+    const cards = document.getElementsByClassName('gc-contrib-card')
+    if (cards.length === 0) return
+
+    contribObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            loadCardData(entry.target as HTMLElement)
+            contribObserver?.unobserve(entry.target)
+          }
+        })
+      },
+      { rootMargin: '200px' }
+    )
+
+    Array.from(cards).forEach((card) => contribObserver?.observe(card))
+  }
+
+  lazySetupContribCards()
+  document.addEventListener('astro:page-load', lazySetupContribCards)
+</script>
+
+<div class="gc-contrib-card" data-user="msafdev">
+  <div class="text-sm font-medium text-foreground/80 gridco12 gc-contrib-count">Loading...</div>
+  <div class="gc-contrib-grid mt-2"></div>
+</div>

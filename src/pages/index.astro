@@ -1,0 +1,20 @@
+---
+import { themeConfig } from '@/config'
+import { getSortedFilteredPosts } from '@/utils/draft'
+
+import About from '@/components/widget/about.astro'
+
+import List from '@/components/shared/list.astro'
+import IndexLayout from '@/layouts/index-layout.astro'
+import ContribCard from '@/components/widget/contrib-card.astro'
+
+const posts = await getSortedFilteredPosts()
+---
+
+<IndexLayout title={themeConfig.site.title} description={themeConfig.site.description}>
+  <About />
+  <main>
+    <ContribCard />
+    <List posts={posts} />
+  </main>
+</IndexLayout>

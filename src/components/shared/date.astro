@@ -1,0 +1,22 @@
+---
+import { themeConfig } from '@/config'
+import { formatDate } from '@/utils/date'
+import type { FormattedDateProps } from '@/types/index.type'
+
+const {
+  date,
+  format,
+  context = 'default'
+} = Astro.props as FormattedDateProps & { context?: 'list' | 'post' | 'default' }
+---
+
+<time
+  datetime={date.toISOString()}
+  class={(themeConfig.date.dateFormat === 'MONTH DAY YYYY' ||
+    themeConfig.date.dateFormat === 'DAY MONTH YYYY') &&
+  context === 'list'
+    ? 'text-sm text-muted-foreground'
+    : ''}
+>
+  <Fragment set:html={formatDate(date, format)} />
+</time>

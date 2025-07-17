@@ -1,0 +1,187 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+
+@import '@/styles/post.css';
+@import '@/styles/toc.css';
+
+@custom-variant dark (&:is(.dark *));
+
+@theme {
+  --font-sans: 'Inter', 'sans-serif';
+  --font-serif: 'Besley', 'serif';
+  --font-display: 'Doto', 'display';
+
+  --breakpoint-xs: 320px;
+  --breakpoint-sm: 480px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+  --breakpoint-2xl: 1536px;
+}
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+}
+
+:root {
+  --radius: 0.625rem;
+
+  /* Typography */
+  --font-size-s: 14px;
+  --font-size-m: 16px;
+  --font-size-l: 18px;
+  --font-weight-light: 350;
+  --font-weight-regular: 400;
+  --font-weight-bold: 500;
+  --spacing-s: -0.08em;
+  --spacing-m: -0.02em;
+
+  /* Light Mode Colors */
+  --background: rgba(255, 255, 255, 1);
+  --foreground: rgba(20, 20, 20, 0.9);
+
+  --card: rgba(255, 255, 255, 1);
+  --card-foreground: rgba(20, 20, 20, 0.9);
+
+  --popover: rgba(255, 255, 255, 1);
+  --popover-foreground: rgba(20, 20, 20, 0.9);
+
+  --primary: rgba(20, 20, 20, 0.9);
+  --primary-foreground: rgba(255, 255, 255, 1);
+
+  --secondary: rgba(229, 243, 255, 1); /* light blue */
+  --secondary-foreground: rgba(15, 76, 117, 1);
+
+  --muted: rgba(240, 240, 240, 1);
+  --muted-foreground: rgba(80, 80, 80, 0.6);
+
+  --accent: rgba(255, 245, 230, 1); /* light orange tint */
+  --accent-foreground: rgba(120, 50, 10, 1);
+
+  --destructive: rgba(220, 38, 38, 1);
+  --destructive-foreground: rgba(255, 255, 255, 1);
+
+  --border: rgba(0, 0, 0, 0.1);
+  --input: rgba(0, 0, 0, 0.1);
+  --ring: rgba(0, 0, 0, 0.4);
+
+  --selection: rgb(213, 103, 230);
+  --selection-foreground: var(--color-background);
+
+  /* Code highlighting */
+  --code-bg: rgba(0, 0, 0, 0.04);
+  --mark: rgba(243, 255, 196, 1);
+
+  /* Syntax Theme */
+  --astro-code-foreground: rgba(20, 20, 20, 0.9);
+  --astro-code-background: rgba(0, 0, 0, 0.03);
+  --astro-code-token-constant: rgba(20, 20, 20, 0.9);
+  --astro-code-token-string: rgba(20, 20, 20, 0.9);
+  --astro-code-token-comment: rgba(20, 20, 20, 0.35);
+  --astro-code-token-keyword: rgba(20, 20, 20, 0.55);
+  --astro-code-token-parameter: rgba(20, 20, 20, 0.9);
+  --astro-code-token-function: rgba(20, 20, 20, 0.9);
+  --astro-code-token-string-expression: rgba(20, 20, 20, 0.55);
+  --astro-code-token-punctuation: rgba(20, 20, 20, 0.55);
+  --astro-code-token-link: rgba(20, 20, 20, 0.55);
+}
+
+.dark {
+  --background: rgba(18, 18, 18, 1);
+  --foreground: rgba(255, 255, 255, 0.92);
+
+  --card: rgba(28, 28, 28, 1);
+  --card-foreground: rgba(255, 255, 255, 0.92);
+
+  --popover: rgba(28, 28, 28, 1);
+  --popover-foreground: rgba(255, 255, 255, 0.92);
+
+  --primary: rgba(255, 255, 255, 0.92);
+  --primary-foreground: rgba(18, 18, 18, 1);
+
+  --secondary: rgba(34, 47, 63, 1); /* muted navy */
+  --secondary-foreground: rgba(208, 231, 255, 1);
+
+  --muted: rgba(40, 40, 40, 1);
+  --muted-foreground: rgba(200, 200, 200, 0.5);
+
+  --accent: rgba(54, 44, 30, 1); /* muted amber */
+  --accent-foreground: rgba(255, 237, 205, 1);
+
+  --destructive: rgba(239, 68, 68, 1);
+  --destructive-foreground: rgba(18, 18, 18, 1);
+
+  --border: rgba(255, 255, 255, 0.1);
+  --input: rgba(255, 255, 255, 0.1);
+  --ring: rgba(255, 255, 255, 0.4);
+
+  --selection: rgba(228, 222, 125, 0.98);
+  --selection-foreground: var(--color-background);
+
+  /* Code highlighting */
+  --code-bg: rgba(255, 255, 255, 0.04);
+  --mark: rgba(84, 91, 55, 1);
+
+  /* Syntax Theme */
+  --astro-code-foreground: rgba(255, 255, 255, 0.9);
+  --astro-code-background: rgba(255, 255, 255, 0.03);
+  --astro-code-token-constant: rgba(255, 255, 255, 0.9);
+  --astro-code-token-string: rgba(255, 255, 255, 0.9);
+  --astro-code-token-comment: rgba(255, 255, 255, 0.35);
+  --astro-code-token-keyword: rgba(255, 255, 255, 0.55);
+  --astro-code-token-parameter: rgba(255, 255, 255, 0.9);
+  --astro-code-token-function: rgba(255, 255, 255, 0.9);
+  --astro-code-token-string-expression: rgba(255, 255, 255, 0.55);
+  --astro-code-token-punctuation: rgba(255, 255, 255, 0.55);
+  --astro-code-token-link: rgba(255, 255, 255, 0.55);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+::selection {
+  background-color: var(--selection);
+  color: var(--selection-foreground);
+}
+
+:focus {
+  outline: 2px solid var(--text-tertiary);
+  outline-offset: 2px;
+}
+
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+:focus-visible {
+  outline: 2px solid var(--text-tertiary);
+  outline-offset: 2px;
+}

@@ -1,0 +1,87 @@
+---
+
+---
+
+<div
+  id="image-viewer"
+  class="fixed inset-0 z-[9999] hidden items-center justify-center bg-background/90 backdrop-blur-sm transition-opacity duration-150 min-h-svh cursor-zoom-out"
+>
+  <img
+    id="image-viewer-img"
+    src=""
+    alt=""
+    class="sm:max-h-[50vh] sm:max-w-[60vw] sm:min-w-[45rem] object-contain min-w-full"
+  />
+</div>
+
+<script type="module">
+  function initImageViewer() {
+    const viewer = document.getElementById('image-viewer')
+    const viewerImg = document.getElementById('image-viewer-img')
+
+    if (!viewer || !viewerImg || viewerImg.tagName !== 'IMG') return
+
+    function showImage(src, alt = '') {
+      viewerImg.src = src
+      viewerImg.alt = alt
+      viewer.classList.remove('hidden')
+      viewer.classList.add('flex')
+      document.body.classList.add('overflow-hidden')
+      viewer.style.cursor = 'auto'
+      setTimeout(() => (viewer.style.cursor = ''), 10)
+    }
+
+    function hideImage() {
+      viewer.classList.remove('flex')
+      viewer.classList.add('hidden')
+      document.body.classList.remove('overflow-hidden')
+      setTimeout(() => {
+        viewerImg.src = ''
+        viewerImg.alt = ''
+        viewer.style.cursor = 'auto'
+        setTimeout(() => (viewer.style.cursor = ''), 10)
+      }, 300)
+    }
+
+    function bindImageClickEvents() {
+      const previewImages = document.querySelectorAll('img[data-preview="true"]')
+      previewImages.forEach((img) => {
+        img.style.cursor = 'zoom-in'
+        img.addEventListener('click', (e) => {
+          e.preventDefault()
+          const target = e.target
+          showImage(target.src, target.alt || '')
+        })
+      })
+    }
+
+    viewer.addEventListener('click', hideImage)
+
+    viewer.addEventListener(
+      'touchmove',
+      (e) => {
+        if (viewer.classList.contains('flex')) e.preventDefault()
+      },
+      { passive: false }
+    )
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && viewer.classList.contains('flex')) {
+        hideImage()
+      }
+    })
+
+    bindImageClickEvents()
+
+    const observer = new MutationObserver(bindImageClickEvents)
+    observer.observe(document.body, { childList: true, subtree: true })
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initImageViewer)
+  } else {
+    initImageViewer()
+  }
+
+  document.addEventListener('astro:page-load', initImageViewer)
+</script>
