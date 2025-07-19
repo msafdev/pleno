@@ -1,0 +1,23 @@
+---
+import { getEntry, render } from 'astro:content'
+
+import type { ParagraphProps } from '@/types/index.type'
+
+const { slug } = Astro.props as ParagraphProps
+
+const entry = await getEntry('paragraphs', slug)
+
+const hasContent = entry?.body
+  ? entry.body.replace(/<!--[\s\S]*?-->/g, '').trim().length > 0
+  : false
+
+const { Content: Rendered } = hasContent && entry ? await render(entry) : { Content: null }
+---
+
+{
+  hasContent && Rendered && (
+    <div class:list={['prose', '!mb-8']}>
+      <Rendered />
+    </div>
+  )
+}

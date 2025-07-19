@@ -5,7 +5,8 @@
     @apply relative;
   }
 
-  .copy-button, .copy-button svg{
+  .copy-button,
+  .copy-button svg {
     @apply size-8 absolute top-2 right-2 cursor-pointer;
   }
 
@@ -18,22 +19,22 @@
   }
 
   .prose h1 {
-    @apply text-xl font-semibold;
+    @apply text-lg md:text-xl font-semibold font-serif;
   }
 
   .prose h2,
   .prose h3 {
-    @apply text-lg font-semibold mt-8 mb-4;
+    @apply text-base md:text-lg font-semibold mt-8 mb-4 font-serif;
   }
 
   .prose h4,
   .prose h5 {
-    @apply text-lg font-medium mt-6 mb-4;
+    @apply text-base md:text-lg font-medium mt-6 mb-4 font-serif;
   }
 
   .prose strong,
   .prose b {
-    @apply font-bold;
+    @apply font-semibold text-foreground;
   }
 
   .prose em {
@@ -45,7 +46,7 @@
   }
 
   .prose p {
-    @apply leading-normal mb-4 text-foreground/80;
+    @apply text-sm md:text-base leading-normal mb-4 text-foreground/60;
   }
 
   .prose table {
@@ -107,7 +108,7 @@
   }
 
   .prose code {
-    @apply px-1.5 py-0.5 rounded-md border border-border bg-muted font-mono text-sm;
+    @apply px-1.5 py-0.5 rounded-md border border-border bg-muted text-foreground font-mono text-sm;
   }
 
   .prose pre {
@@ -132,7 +133,7 @@
     @apply m-0;
   }
   .prose blockquote cite {
-    @apply inline-block mt-2;
+    @apply inline-block mt-2 text-foreground;
   }
 
   .prose ul {
@@ -149,7 +150,7 @@
   }
   .prose ul li::before {
     content: '•';
-    @apply absolute -left-4 text-muted;
+    @apply absolute -left-4 text-muted-foreground;
   }
 
   .prose ol {
@@ -157,6 +158,9 @@
   }
   .prose ol li {
     @apply relative pl-1 mb-2;
+  }
+  .prose ol li::marker {
+    @apply text-muted-foreground;
   }
   .prose ol li:last-child {
     @apply mb-0;
@@ -179,7 +183,7 @@
   }
   .prose ul.contains-task-list input[type='checkbox']:checked::before {
     content: '✓';
-    @apply absolute left-0.5 top-0 text-muted font-bold text-xs;
+    @apply absolute left-0.5 top-0 text-foreground font-bold text-xs;
   }
   .prose ul.contains-task-list input[type='checkbox'] + * {
     @apply inline ml-0 leading-7 whitespace-nowrap;

@@ -1,4 +1,4 @@
-import type { CollectionEntry } from "astro:content"
+import type { CollectionEntry } from 'astro:content'
 
 // Reading time interface
 export interface ReadingTime {
@@ -19,4 +19,9 @@ export interface TOCItem {
 // PostList component props interface
 export interface PostListProps {
   posts: CollectionEntry<'posts'>[]
+}
+
+// Paragraph component props interface
+export interface ParagraphProps {
+  slug: string
 }

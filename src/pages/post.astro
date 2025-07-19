@@ -2,7 +2,7 @@
 import { themeConfig } from '@/config'
 import { getSortedFilteredPosts } from '@/utils/draft'
 
-import GitHubCalendar from '@/components/shared/react/github-calendar'
+import List from '@/components/shared/list.astro'
 
 import IndexLayout from '@/layouts/index-layout.astro'
 
@@ -12,9 +12,8 @@ const posts = await getSortedFilteredPosts()
 ---
 
 <IndexLayout title={themeConfig.site.title} description={themeConfig.site.description}>
-  <Content slug="intro" />
+  <Content slug="about" />
   <main>
-    <GitHubCalendar user="msafdev" client:load />
+    <List posts={posts} />
   </main>
-  <Content slug="show" />
 </IndexLayout>

@@ -3,25 +3,26 @@ title: 'Using MDX'
 pubDate: '2025-05-12'
 ---
 
-import Callout from '@/components/examples/Callout.astro'
-import CounterButton from '@/components/examples/CounterButton.astro'
-import Tag from '@/components/examples/Tag.astro'
+import { Badge } from '@/components/ui/badge'
+import Profile from '@/components/widget/profile.astro'
 
 MDX combines Markdown with embedded JavaScript and JSX, making it easy to build interactive content. Below are some examples.
 
 ---
 
-## Callout
+## Badge (React)
 
-<Callout />
+<div className="border w-full px-4 py-8 flex items-center justify-center gap-2 md:px-8 md:py-16 flex-wrap rounded">
+  <Badge variant="muted">Astro</Badge>
+  <Badge variant="muted">Tailwind</Badge>
+  <Badge variant="muted">Markdown</Badge>
+</div>
 
-## Button
+## Profile (Astro + React)
 
-<CounterButton />
-
-## Tag
-
-<Tag />
+<div className="border w-full px-4 py-8 flex items-center justify-center gap-2 md:px-8 md:py-16 flex-wrap rounded">
+  <Profile />
+</div>
 
 ---
 
