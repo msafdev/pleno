@@ -10,7 +10,7 @@ export type DateFormat =
 export interface SiteInfo {
   website: string
   title: string
-  author: string
+  author: { name: string; avatarUrl?: string; role?: string }
   description: string
   language: string
 }
@@ -26,7 +26,6 @@ export interface GeneralSettings {
 export interface DateSettings {
   dateFormat: DateFormat
   dateSeparator: string
-  dateOnRight: boolean
 }
 
 // Post settings configuration type
@@ -34,6 +33,7 @@ export interface PostSettings {
   readingTime: boolean
   toc: boolean
   imageViewer: boolean
+  authorProfile: boolean
   copyCode: boolean
 }
 

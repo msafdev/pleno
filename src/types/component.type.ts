@@ -31,6 +31,9 @@ export interface BaseHeadProps {
   title: string
   description: string
   ogImage?: string
+  author: {
+    name: string
+  }
 }
 
 // ImageOptimizer component props interface

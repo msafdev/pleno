@@ -1,11 +1,36 @@
 ---
 import Avatar from '@/components/shared/react/avatar'
+import { themeConfig } from '@/config'
+import Date from '../shared/date.astro'
+
+const { className, pubDate, readingTime } = Astro.props
 ---
 
-<div class="flex items-center gap-3">
-  <Avatar client:load src="https://github.com/msafdev.png" alt="@msafdev" fallback="MS" />
+<div class:list={['flex items-center gap-3', className]}>
+  <Avatar
+    alt={themeConfig.site.author.name}
+    src={themeConfig.site.author.avatarUrl ?? '/'}
+    fallback={themeConfig.site.author.name.slice(0, 1).toUpperCase()}
+    client:only="react"
+  />
   <div>
-    <p class="text-sm !mb-0 !mt-0 text-foreground">Salman Alfarisi</p>
-    <span class="text-xs !mb-0 !mt-0 text-muted-foreground">Product Engineer</span>
+    <p class="text-sm !mb-0 !mt-0 text-foreground">{themeConfig.site.author.name}</p>
+    {
+      themeConfig.site.author.role ? (
+        <span class="text-xs !mb-0 !mt-0 text-muted-foreground">
+          {themeConfig.site.author.role}
+        </span>
+      ) : (
+        <div class="text-sm opacity-60">
+          <Date date={pubDate} context="post" />
+          {readingTime && (
+            <span class="text-foreground">
+              <span class="text-muted-foreground">·</span>
+              {readingTime.minutes} mins
+            </span>
+          )}
+        </div>
+      )
+    }
   </div>
 </div>

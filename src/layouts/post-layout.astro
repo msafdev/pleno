@@ -17,6 +17,7 @@ import ImageOptimizer from '@/functions/image-optimizer.astro'
 import Footer from '@/components/widget/footer.astro'
 import Meta from '@/components/widget/meta.astro'
 import Header from '@/components/widget/header.astro'
+import Profile from '@/components/widget/profile.astro'
 
 const { title, pubDate, readingTime, toc } = Astro.props as PostLayoutProps
 
@@ -24,11 +25,7 @@ const postSlug = Astro.url.pathname.split('/').filter(Boolean).pop() || ''
 const ogImage = `/open-graph/${postSlug}.png`
 ---
 
-<RootLayout
-  title={`${title} · ${themeConfig.site.title}`}
-  description={themeConfig.site.description}
-  type="post"
->
+<RootLayout type="post">
   <Meta
     title={`${title} · ${themeConfig.site.title}`}
     description={themeConfig.site.description}
@@ -52,17 +49,22 @@ const ogImage = `/open-graph/${postSlug}.png`
 
         <div class="title">
           <h1 transition:name="post_title">{title}</h1>
-          <div class="text-sm opacity-60">
-            <Date date={pubDate} context="post" />
-            {
-              readingTime && (
-                <span class="text-foreground">
-                  <span class="text-muted-foreground">·</span>
-                  {readingTime.minutes} mins
-                </span>
-              )
-            }
-          </div>
+
+          {
+            themeConfig.post.authorProfile ? (
+              <Profile className="my-8" />
+            ) : (
+              <div class="text-sm opacity-60">
+                <Date date={pubDate} context="post" />
+                {readingTime && (
+                  <span class="text-foreground">
+                    <span class="text-muted-foreground">·</span>
+                    {readingTime.minutes} mins
+                  </span>
+                )}
+              </div>
+            )
+          }
         </div>
 
         <slot />

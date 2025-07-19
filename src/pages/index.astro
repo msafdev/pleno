@@ -7,11 +7,12 @@ import GitHubCalendar from '@/components/shared/react/github-calendar'
 import IndexLayout from '@/layouts/index-layout.astro'
 
 import Content from '@/components/widget/content.astro'
-
-const posts = await getSortedFilteredPosts()
 ---
 
-<IndexLayout title={themeConfig.site.title} description={themeConfig.site.description}>
+<IndexLayout
+  title={themeConfig.site.title}
+  description={themeConfig.site.description}
+>
   <Content slug="intro" />
   <main>
     <GitHubCalendar user="msafdev" client:load />

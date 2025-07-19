@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button'
 import { ToggleTheme } from '@/components/shared/react/toggle-theme'
 
 import { Book } from 'lucide-react'
+import { themeConfig } from '@/config'
 ---
 
 <header class="flex items-center justify-between">
@@ -21,6 +22,6 @@ import { Book } from 'lucide-react'
         <Book className="" />
       </Button>
     </a>
-    <ToggleTheme client:only="react" />
+    {themeConfig.general.themeToggle && <ToggleTheme client:only="react" />}
   </div>
 </header>

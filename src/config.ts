@@ -4,22 +4,26 @@ export const themeConfig: ThemeConfig = {
   site: {
     website: 'http://localhost:4321',
     title: 'Pleno',
-    author: 'Msafdev',
+    author: {
+      name: 'Msafdev',
+      avatarUrl: 'http://github.com/msafdev.png',
+      role: 'Product Engineer'
+    },
     description: 'Minimal blog built by Astro and Chiri',
     language: 'en-US'
   },
   general: {
-    themeToggle: false,
+    themeToggle: true,
     footer: true,
     clientRouter: false // Only works on Edge and Chrome
   },
   date: {
     dateFormat: 'DAY MONTH YYYY',
-    dateSeparator: '.',
-    dateOnRight: true
+    dateSeparator: '.'
   },
   post: {
     readingTime: true,
+    authorProfile: true,
     toc: true,
     imageViewer: true,
     copyCode: true

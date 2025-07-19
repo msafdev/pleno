@@ -10,12 +10,11 @@ Chiri is a minimal blog theme built with [Astro](https://astro.build), offering 
 ## Basic Commands
 
 - `pnpm new <title>` - Create a new post (use `_title` for drafts)
-- `pnpm update-theme` - Update the theme to the latest version
 
 ## Main Files & Directories
 
-- `src/content/about/about.md` - Edit the about section of the index page. Leave it empty if you don't want any content.
-- `src/content/posts/` - All blog posts are stored here
+- `src/content/paragraphs/[...slug].md` - Add or edit your contents.
+- `src/content/posts/[...slug].[md/mdx]` - All blog posts are stored here
 - `src/config.ts` - Configure main site info and settings ↓
 
 - Site Info
@@ -23,11 +22,15 @@ Chiri is a minimal blog theme built with [Astro](https://astro.build), offering 
 ```ts
 site: {
   // Site domain
-  website: 'https://astro-chiri.netlify.app/',
+  website: 'https://pleno.netlify.app/',
   // Site title
-  title: 'CHIRI',
-  // Author name
-  author: '3ASH',
+  title: 'Pleno',
+  // Author name, avatarUrl, and role
+  author: {
+      name: 'Msafdev',
+      avatarUrl: 'http://github.com/msafdev.png',
+      role: 'Product Engineer'
+  },
   // Site description
   description: 'Minimal blog built by Astro',
   // Default language
@@ -39,10 +42,6 @@ site: {
 
 ```ts
 general: {
-  // Content area width
-  contentWidth: '35rem',
-  // Use centered layout (false for left-aligned)
-  centeredLayout: true,
   // Show theme toggle button (uses system theme by default)
   themeToggle: false,
   // Show footer
@@ -60,8 +59,6 @@ date: {
   dateFormat: 'YYYY-MM-DD',
   // Date separator: . - / (except for MONTH DAY YYYY and DAY MONTH YYYY)
   dateSeparator: '.',
-  // Date position in post list (true for right, false for left)
-  dateOnRight: true
 },
 ```
 
@@ -77,6 +74,8 @@ post: {
   imageViewer: true,
   // Enable copy button in code blocks
   copyCode: true
+  // Enable profile on content (if none, fallbacks to datePub and readingTime)
+  authorProfile: true
 }
 ```
 
@@ -114,3 +113,5 @@ pubDate: '2025-07-10'
 - Copy Code Button
 
 ![_Copy Code Button](./_assets/copy-code.png)
+
+## Components
