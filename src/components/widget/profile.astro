@@ -13,7 +13,7 @@ const { className, pubDate, readingTime } = Astro.props
     fallback={themeConfig.site.author.name.slice(0, 1).toUpperCase()}
     client:only="react"
   />
-  <div>
+  <div class="flex justify-center flex-col">
     <p class="text-sm !mb-0 !mt-0 text-foreground">{themeConfig.site.author.name}</p>
     {
       themeConfig.site.author.role ? (

@@ -1,9 +1,6 @@
 ---
 import { themeConfig } from '@/config'
-import type { LayoutProps } from '@/types/index.type'
 import { ClientRouter } from 'astro:transitions'
-
-type Props = LayoutProps
 
 const language = themeConfig.site.language || 'en-US'
 const clientRouter = themeConfig.general.clientRouter

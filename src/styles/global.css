@@ -7,9 +7,8 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme {
-  --font-sans: 'Inter', 'sans-serif';
+  --font-sans: 'Rubik', 'sans-serif';
   --font-serif: 'Besley', 'serif';
-  --font-display: 'Doto', 'display';
 
   --breakpoint-xs: 320px;
   --breakpoint-sm: 480px;
@@ -35,6 +34,8 @@
   --color-primary-foreground: var(--primary-foreground);
   --color-secondary: var(--secondary);
   --color-secondary-foreground: var(--secondary-foreground);
+  --color-tertiary: var(--tertiary);
+  --color-tertiary-foreground: var(--tertiary-foreground);
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
   --color-accent: var(--accent);
@@ -73,6 +74,9 @@
 
   --secondary: rgba(229, 243, 255, 1); /* light blue */
   --secondary-foreground: rgba(15, 76, 117, 1);
+
+  --tertiary: hsl(145, 63%, 52%); /* vibrant green */
+  --tertiary-foreground: hsl(155, 75%, 96%);
 
   --muted: rgba(240, 240, 240, 1);
   --muted-foreground: rgba(80, 80, 80, 0.6);
@@ -123,6 +127,9 @@
 
   --secondary: rgba(34, 47, 63, 1); /* muted navy */
   --secondary-foreground: rgba(208, 231, 255, 1);
+
+  --tertiary: hsl(155, 45%, 60%); /* slightly softer green in dark mode */
+  --tertiary-foreground: hsl(145, 80%, 15%);
 
   --muted: rgba(40, 40, 40, 1);
   --muted-foreground: rgba(200, 200, 200, 0.5);

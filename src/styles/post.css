@@ -42,11 +42,11 @@
   }
 
   .prose a {
-    @apply text-primary transition-colors duration-200 ease-out hover:underline hover:text-foreground;
+    @apply text-primary transition-colors duration-200 ease-out hover:underline hover:text-foreground font-medium;
   }
 
   .prose p {
-    @apply text-sm md:text-base leading-normal mb-4 text-foreground/60;
+    @apply text-sm md:text-base leading-normal mb-4 text-foreground/65;
   }
 
   .prose table {
@@ -104,7 +104,7 @@
   .prose figure figcaption,
   .prose .img-caption,
   .prose p > img::after {
-    @apply text-muted text-sm text-center block mt-2;
+    @apply text-muted-foreground text-sm text-center block mt-2;
   }
 
   .prose code {
@@ -196,15 +196,15 @@
   }
 
   .prose hr {
-    @apply my-10 h-4 text-center relative border-none bg-none;
+    @apply my-10 h-auto text-center relative border-none bg-none;
   }
   .prose hr::after {
-    content: '***';
+    content: '·̩͙།† ͝ ︶ ͝ ⏝ ͝ ︶ ͝ †། ·̩͙';
     @apply font-mono h-4 text-muted-foreground !text-sm tracking-widest;
   }
 
   .prose kbd {
-    @apply font-mono text-sm border border-muted px-1 rounded min-w-[1.75em] inline-block text-center;
+    @apply font-mono text-sm text-foreground border border-border bg-muted px-1.5 rounded min-w-[1.75em] inline-block text-center;
   }
 
   .prose mark {
@@ -212,12 +212,9 @@
   }
 
   .prose .footnotes {
-    @apply mt-16 pt-7 relative;
+    @apply relative;
   }
-  .prose .footnotes::before {
-    @apply absolute top-0 left-0 w-16 h-px bg-border;
-    content: '';
-  }
+
   .prose cite {
     @apply not-italic;
   }

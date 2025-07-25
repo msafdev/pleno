@@ -11,10 +11,7 @@ import Content from '@/components/widget/content.astro'
 const posts = await getSortedFilteredPosts()
 ---
 
-<IndexLayout
-  title={themeConfig.site.title}
-  description={themeConfig.site.description}
->
+<IndexLayout title={themeConfig.site.title} description={themeConfig.site.description}>
   <Content slug="about" />
   <main>
     <List posts={posts} />

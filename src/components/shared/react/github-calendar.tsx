@@ -111,7 +111,7 @@ export default function GitHubCalendar({ user, token }: GitHubCalendarProps) {
     const json = await response.json()
     const contributionCalendar = json?.data?.user?.contributionsCollection?.contributionCalendar
     const weeks = contributionCalendar?.weeks
-    const days: ContributionDay[] = weeks.flatMap((week: any) => week.contributionDays)
+    const days: ContributionDay[] = weeks.flatMap((week: any) => week.contributionDays) // eslint-disable-line @typescript-eslint/no-explicit-any
     return normalizeContributions(days)
   }
 
@@ -158,7 +158,7 @@ export default function GitHubCalendar({ user, token }: GitHubCalendarProps) {
         blockMargin={4}
         colorScheme="light"
         theme={{
-          light: ['var(--color-muted)', 'var(--color-muted-foreground)']
+          light: ['var(--color-muted)', 'var(--color-tertiary)']
         }}
       />
     </div>

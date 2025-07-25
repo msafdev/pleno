@@ -49,6 +49,7 @@ import { themeConfig } from '@/config'
         try {
           await navigator.clipboard.writeText(codeText)
         } catch (err) {
+          alert(err)
           const fallback = document.createElement('textarea')
           fallback.value = codeText
           fallback.style.position = 'fixed'

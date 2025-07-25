@@ -15,7 +15,7 @@ const paragraphs = defineCollection({
   loader: glob({ base: './src/content/paragraphs', pattern: '**/*.{md,mdx}' }),
   schema: () =>
     z.object({
-      title: z.string(),
+      title: z.string()
     })
 })
 

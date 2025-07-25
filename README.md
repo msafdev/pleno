@@ -1,5 +1,27 @@
 # 🧞 Pleno
 
+## ⚡ Pagespeed Insight
+
+<!-- PAGESPEED_START -->
+
+```typescript
+const pagespeed = {
+  "https://pleno-green.vercel.app": {
+    strategy: "mobile",
+    language: "en",
+    scores: {
+      "Performance"     :  97, // ▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▱
+      "Accessibility"   :  87, // ▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▱▱▱
+      "Best Practices"  : 100, // ▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰
+      "SEO"             : 100, // ▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰
+      "PWA"             :   0, // ▱▱▱▱▱▱▱▱▱▱▱▱▱▱▱▱▱▱▱▱▱▱▱▱▱
+    }
+  }
+};
+```
+
+<!-- PAGESPEED_END -->
+
 ## ⚙️ Commands
 
 All commands are run from the root of the project, from a terminal:

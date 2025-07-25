@@ -40,7 +40,7 @@ export function ToggleTheme() {
       variant="ghost"
       size="icon"
       onClick={toggleTheme}
-      aria-label="Toggle theme"
+      aria-label="toggle theme"
       className="cursor-pointer hover:bg-muted hover:text-foreground dark:hover:bg-muted dark:hover:text-foreground"
     >
       {theme === 'dark' ? <Sun className="size-4" /> : <Moon className="size-4" />}

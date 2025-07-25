@@ -13,15 +13,16 @@ import { themeConfig } from '@/config'
   </a>
 
   <div class="flex items-center gap-1">
+    {themeConfig.general.themeToggle && <ToggleTheme client:only="react" />}
     <a href="/post" aria-label="go to /post">
       <Button
         size="icon"
         variant="ghost"
+        aria-label="navigate to /post"
         className="cursor-pointer hover:bg-muted hover:text-foreground dark:hover:bg-muted dark:hover:text-foreground"
       >
         <Book className="" />
       </Button>
     </a>
-    {themeConfig.general.themeToggle && <ToggleTheme client:only="react" />}
   </div>
 </header>

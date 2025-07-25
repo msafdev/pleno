@@ -51,8 +51,8 @@ export default defineConfig({
   experimental: {
     fonts: [
       {
-        name: 'Inter',
-        cssVariable: '--font-inter',
+        name: 'Rubik',
+        cssVariable: '--font-rubik',
         provider: fontProviders.google()
       },
       {
